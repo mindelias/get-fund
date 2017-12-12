@@ -218,8 +218,8 @@ return [
     'old_password'                  => 'Old password',
     'password_changed_msg'          => 'Password has been changed successfully',
     'wrong_old_password'            => 'Wrong old password',
-    'banner_main_header'            => 'A Professional Laravel Crowdfunding Platform',
-    'banner_sub_header'             => 'Create your own world class professional fund raising platform within 5 minutes',
+    'banner_main_header'            => 'A Crowdfunding Platform to Raise capital',
+    'banner_sub_header'             => 'Create a fund raising campaign within 5 minutes',
     'support_campaigns'             => 'Support Campaigns',
     'start_crowdfunding'            => 'Start Crowdfunding',
     'why_choose_us'                 => 'Why choose us',
@@ -229,7 +229,7 @@ return [
     'flexible'                      => 'Flexible',
     'flexible_desc'                 => 'You can donate any of amount whatever you want, there is no fixed amount in the campaigns',
     'easy'                          => 'Easy',
-    'easy_desc'                     => 'Create a campaign or donate less then 5 minutes, just create campaigns, get fund and make your dream.',
+    'easy_desc'                     => 'Create a campaign or donate in less than 5 minutes, just create campaigns, get fund and make your dream.',
     'supports_reward'               => 'Supports reward',
     'supports_reward_desc'               => 'Campaigns owner can offer for reward, so the backer will get reward for the specific donation',
     'get_started_today'             => 'Get started today',
@@ -268,7 +268,7 @@ return [
     'logo_settings'         => 'Logo Settings',
     'show_image'            => 'Show Image',
     'show_site_name'        => 'Show Website Name',
-    
+
     'social_settings'       => 'Social settings',
     'social_login'              => 'Social Login',
     'enable_social_login'       => 'Enable Social Login',

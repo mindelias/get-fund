@@ -16,8 +16,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::get('campaign/{id}/{slug?}', ['as' => 'campaign_single', 'uses' => 'CampaignsController@show']);
+
 Route::get('campaign-backers/{id}/{slug?}', ['as' => 'campaign_backers', 'uses' => 'CampaignsController@showBackers']);
+
 Route::get('campaign-updates/{id}/{slug?}', ['as' => 'campaign_updates', 'uses' => 'CampaignsController@showUpdates']);
+
 Route::get('campaign-faqs/{id}/{slug?}', ['as' => 'campaign_faqs', 'uses' => 'CampaignsController@showFaqs']);
 
 Route::any('add-to-cart/{reward_id?}', ['as' => 'add_to_cart', 'uses' => 'CampaignsController@addToCart']);
@@ -25,20 +28,24 @@ Route::any('add-to-cart/{reward_id?}', ['as' => 'add_to_cart', 'uses' => 'Campai
 //categories
 
 Route::get('search', ['as' => 'search', 'uses' => 'CategoriesController@search']);
+
 Route::get('p/{slug}', ['as' => 'single_page', 'uses' => 'PostController@showPage']);
 
 Route::get('categories', ['as' => 'browse_categories', 'uses' => 'CategoriesController@browseCategories']);
+
 Route::get('categories/{id}/{slug?}', ['as' => 'single_category', 'uses' => 'CategoriesController@singleCategory']);
 
 
 //checkout
 Route::get('checkout', ['as' => 'checkout', 'uses' => 'CampaignsController@checkout']);
+
 Route::post('checkout', ['uses' => 'CampaignsController@checkoutPost']);
 
 //Payment
 Route::post('checkout/paypal', ['as' => 'payment_paypal_receive','uses' => 'CampaignsController@paypalRedirect']);
 
 Route::any('checkout/paypal-success/{transaction_id?}', ['as' => 'payment_success','uses' => 'CampaignsController@paymentSuccess']);
+
 Route::any('checkout/paypal-notify/{transaction_id?}', ['as' => 'paypal_notify', 'uses' => 'CampaignsController@paypalNotify']);
 
 Route::post('checkout/stripe', ['as' => 'payment_stripe_receive', 'uses' => 'CampaignsController@paymentStripeReceive']);
@@ -55,6 +62,7 @@ Route::group(['prefix'=>'login'], function(){
     Route::get('facebook-callback', ['as' => 'facebook_callback', 'uses'=>'SocialLogin@callbackFacebook']);
 
     Route::get('google', ['as' => 'google_redirect', 'uses'=>'SocialLogin@redirectGoogle']);
+
     Route::get('google-callback', ['as' => 'google_callback', 'uses'=>'SocialLogin@callbackGoogle']);
 
 });
@@ -84,6 +92,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function() {
 
         //Updates
         Route::get('edit_campaign/{id}/updates', ['as'=>'edit_campaign_updates', 'uses' => 'UpdateController@index']);
+
         Route::post('edit_campaign/{id}/updates', [ 'uses' => 'UpdateController@store']);
 
         Route::get('edit_campaign/{id}/updates/update/{update_id}', ['as'=>'update_update', 'uses' => 'UpdateController@edit']);
@@ -116,12 +125,16 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function() {
 
         Route::group(['prefix'=>'campaigns'], function() {
             Route::get('all_campaigns', ['as'=>'all_campaigns', 'uses' => 'CampaignsController@allCampaigns']);
+
             Route::get('staff_picks', ['as'=>'staff_picks', 'uses' => 'CampaignsController@staffPicksCampaigns']);
             Route::get('funded', ['as'=>'funded', 'uses' => 'CampaignsController@fundedCampaigns']);
+
             Route::get('blocked_campaigns', ['as'=>'blocked_campaigns', 'uses' => 'CampaignsController@blockedCampaigns']);
+
             Route::get('pending_campaigns', ['as'=>'pending_campaigns', 'uses' => 'CampaignsController@pendingCampaigns']);
 
             Route::get('expired_campaigns', ['as'=>'expired_campaigns', 'uses' => 'CampaignsController@expiredCampaigns']);
+
             Route::get('campaign-search', ['as'=>'campaign_admin_search', 'uses' => 'CampaignsController@searchAdminCampaigns']);
 
             Route::get('campaign_status/{id}/{status}', ['as'=>'campaign_status', 'uses' => 'CampaignsController@statusChange']);
@@ -130,7 +143,9 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function() {
         //Settings
         Route::group(['prefix'=>'settings'], function(){
             Route::get('theme-settings', ['as'=>'theme_settings', 'uses' => 'SettingsController@ThemeSettings']);
+
             Route::get('general', ['as'=>'general_settings', 'uses' => 'SettingsController@GeneralSettings']);
+
             Route::get('payments', ['as'=>'payment_settings', 'uses' => 'SettingsController@PaymentSettings']);
 
             Route::get('social', ['as'=>'social_settings', 'uses' => 'SettingsController@SocialSettings']);
@@ -139,17 +154,21 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function() {
             Route::post('save-settings', ['as'=>'save_settings', 'uses' => 'SettingsController@update']);
 
             Route::get('other', ['as'=>'other_settings', 'uses' => 'SettingsController@OtherSettings']);
+
             Route::post('other', ['as'=>'other_settings', 'uses' => 'SettingsController@OtherSettingsPost']);
         });
 
         Route::group(['prefix'=>'pages'], function(){
             Route::get('/', ['as'=>'pages', 'uses' => 'PostController@index']);
 
-            Route::get('create', ['as'=>'create_new_page', 'uses' => 'PostController@create']);
+            Route::get('create', ['as'=>'create_new_page', 'uses' => 'PostController@create'])
+            ;
             Route::post('create', ['uses' => 'PostController@store']);
+
             Route::post('delete', ['as'=>'delete_page','uses' => 'PostController@destroy']);
 
             Route::get('edit/{slug}', ['as'=>'edit_page', 'uses' => 'PostController@edit']);
+
             Route::post('edit/{slug}', ['uses' => 'PostController@updatePage']);
         });
 
@@ -162,11 +181,10 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function() {
         Route::get('view/{id}', ['as'=>'payment_view', 'uses' => 'PaymentController@view']);
     });
 
+
     Route::group(['prefix'=>'withdraw'], function() {
         Route::get('/', ['as'=>'withdraw', 'uses' => 'PaymentController@withdraw']);
     });
-
-
 
 
 
@@ -183,6 +201,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'auth'], function() {
          */
         Route::group(['prefix' => 'account'], function() {
             Route::get('change-password', ['as' => 'change_password', 'uses' => 'UserController@changePassword']);
+
             Route::post('change-password', 'UserController@changePasswordPost');
         });
 
